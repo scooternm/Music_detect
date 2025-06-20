@@ -1,0 +1,5 @@
+node_modules/
+essentia_env/
+*.dylib
+*.so
+*.map
