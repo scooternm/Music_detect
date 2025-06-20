@@ -22,3 +22,23 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+path/to/bigfile
+essentia_env/
+node_modules/
+# Python
+__pycache__/
+*.py[cod]
+venv/
+essentia_env/
+
+# Node
+node_modules/
+
+# Large binaries
+*.so
+*.dylib
+*.wav
+*.mp3
+
+# macOS
+.DS_Store
