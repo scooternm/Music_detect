@@ -1,0 +1,39 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node.js dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+*.local
+
+# Editor files
+.vscode/
+!.vscode/extensions.json
+.idea/
+
+# macOS files
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+essentia_env/
+.pytest_cache/
+.mypy_cache/
+.coverage
+
+# Large binaries
+*.so
+*.dylib
+*.wav
+*.mp3
