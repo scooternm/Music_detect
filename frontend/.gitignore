@@ -7,38 +7,33 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Node.js dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
 *.local
 
-# Editor directories and files
-.vscode/*
+# Editor files
+.vscode/
 !.vscode/extensions.json
-.idea
+.idea/
+
+# macOS files
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-path/to/bigfile
-essentia_env/
-node_modules/
+
 # Python
 __pycache__/
 *.py[cod]
 venv/
 essentia_env/
-
-# Node
-node_modules/
+.pytest_cache/
+.mypy_cache/
+.coverage
 
 # Large binaries
 *.so
 *.dylib
 *.wav
 *.mp3
-
-# macOS
-.DS_Store
