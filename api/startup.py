@@ -8,9 +8,12 @@ import os
 import sys
 import subprocess
 import argparse
+from fastapi import FastAPI
 from pathlib import Path
 import requests
 import time
+
+app = FastAPI()
 
 class MusicDetectionSetup:
     def __init__(self):
