@@ -157,12 +157,26 @@ async def get_database_songs():
     """Get all songs in the database"""
     
     songs = []
-    for song_id, data in music_db.fingerprints.items():
-        songs.append({
-            "song_id": song_id,
-            "metadata": data.get("metadata", {}),
-            "features_count": len(data.get("chunks", []))
-        })
+    fingerprints_data = music_db.fingerprints
+    
+    # Handle nested fingerprints structure
+    if "fingerprints" in fingerprints_data:
+        fingerprints_data = fingerprints_data["fingerprints"]
+    
+    for song_id, data in fingerprints_data.items():
+        if isinstance(data, dict):
+            songs.append({
+                "song_id": song_id,
+                "metadata": data.get("metadata", {}),
+                "features_count": len(data.get("chunks", []))
+            })
+        else:
+            # Handle string entries (legacy format)
+            songs.append({
+                "song_id": song_id,
+                "metadata": {},
+                "features_count": 1
+            })
     
     return {
         "songs": songs,
@@ -173,10 +187,18 @@ async def get_database_songs():
 async def delete_song(song_id: str):
     """Delete a song from the database"""
     
-    if song_id not in music_db.fingerprints:
-        raise HTTPException(status_code=404, detail="Song not found")
+    fingerprints_data = music_db.fingerprints
     
-    del music_db.fingerprints[song_id]
+    # Handle nested fingerprints structure
+    if "fingerprints" in fingerprints_data:
+        if song_id not in fingerprints_data["fingerprints"]:
+            raise HTTPException(status_code=404, detail="Song not found")
+        del fingerprints_data["fingerprints"][song_id]
+    else:
+        if song_id not in fingerprints_data:
+            raise HTTPException(status_code=404, detail="Song not found")
+        del fingerprints_data[song_id]
+    
     music_db.save_database()
     
     return {"message": f"Song '{song_id}' deleted successfully"}
